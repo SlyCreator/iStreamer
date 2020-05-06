@@ -23,12 +23,12 @@ Route::prefix('v1')->group(function (){
 
         Route::group(['namespace'=>'Admin','prefix'=>'admin'],function (){
 
-            Route::prefix('collections')->group(function (){
-                Route::get('/','AdminController@fetchSeries');
-                Route::get('/{series}','AdminController@fetchserie');
-                Route::post('/','AdminController@create');
-                Route::put('/','AdminController@update');
-                Route::delete('/','AdminController@delete');
+            Route::prefix('Series')->group(function (){
+                Route::get('/','SeriesController@fetchAllSeries');
+                Route::get('/{series}','SeriesController@fetchserie');
+                Route::post('/','SeriesController@create');
+                Route::put('/','SeriesController@update');
+                Route::delete('/','SeriesController@delete');
             });
 
             Route::get('/series','AdminController@fetchSeries');
