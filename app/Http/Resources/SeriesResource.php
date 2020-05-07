@@ -17,7 +17,7 @@ class SeriesResource extends JsonResource
         return [
             "id" => (string)$this->id,
             "type" => 'series',
-            "attribute" => [
+            "attributes" => [
                 'title' => $this->title,
                 'description' => $this->description ,
                 'year' =>  $this->year,
