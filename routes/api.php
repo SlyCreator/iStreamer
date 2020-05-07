@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 //});
 
 Route::prefix('v1')->group(function (){
-    Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>''],function (){
+    Route::group(['namespace'=>'Admin','prefix'=>'admin'],function (){
 
         Route::prefix('series')->group(function (){
             Route::get('/','SeriesController@index');
