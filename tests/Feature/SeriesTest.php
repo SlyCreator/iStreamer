@@ -19,8 +19,8 @@ class SeriesTest extends TestCase
     public function testGetASeriesAsAResourceObject()
     {
         $series =   factory(Series::class)->create();
-
-      $this->get("/api/v1/Admin/Series/1",[
+        dd('hi');
+      $this->getJson("/api/v1/admin/series/1",[
             'accept' => 'application/vnd.api+json',
             'content-type' => 'application/vnd.api+json',
             ])

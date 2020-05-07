@@ -13,50 +13,50 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 Route::prefix('v1')->group(function (){
     Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>''],function (){
 
-        Route::prefix('Series')->group(function (){
-            Route::get('/','SeriesController@fetchAll');
+        Route::prefix('series')->group(function (){
+            Route::get('/','SeriesController@index');
             Route::post('/','SeriesController@create');
             Route::group(['prefix'=>'{series}'],function (){
-                Route::get('/','SeriesController@fetch');
+                Route::get('/','SeriesController@show');
                 Route::put('/','SeriesController@update');
                 Route::delete('/','SeriesController@delete');
             });
         });
 
         Route::prefix('Message')->group(function (){
-            Route::get('/','MessageController@fetchAll');
-            Route::post('/','MessageController@create');
+            Route::get('/','MessagesController@fetchAll');
+            Route::post('/','MessagesController@create');
             Route::group(['prefix'=>'{message}'],function (){
-                Route::get('/','MessageController@fetch');
-                Route::put('/','MessageController@update');
-                Route::delete('/','MessageController@delete');
+                Route::get('/','MessagesController@fetch');
+                Route::put('/','MessagesController@update');
+                Route::delete('/','MessagesController@delete');
             });
         });
 
         Route::prefix('Tags')->group(function (){
-            Route::get('/','TagController@fetchAll');
-            Route::post('/','TagController@create');
+            Route::get('/','TagsController@fetchAll');
+            Route::post('/','TagsController@create');
             Route::group(['prefix'=>'{tag}'],function (){
-                Route::get('/','TagController@fetch');
-                Route::put('/','TagController@update');
-                Route::delete('/','TagController@delete');
+                Route::get('/','TagsController@fetch');
+                Route::put('/','TagsController@update');
+                Route::delete('/','TagsController@delete');
             });
         });
 
         Route::prefix('Ministrations')->group(function (){
-            Route::get('/','Controller@fetchAll');
-            Route::post('/','Controller@create');
+            Route::get('/','MinistrationsController@fetchAll');
+            Route::post('/','MinistrationsController@create');
             Route::prefix('ministration')->group(function (){
-                Route::get('/','Controller@fetch');
-                Route::put('/','Controller@update');
-                Route::delete('/','Controller@delete');
+                Route::get('/','MinistrationsController@fetch');
+                Route::put('/','MinistrationsController@update');
+                Route::delete('/','MinistrationsController@delete');
             });
         });
     });
