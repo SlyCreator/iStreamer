@@ -39,7 +39,7 @@ class SeriesController extends Controller
      */
     public function show(Series $series)
     {
-        return new SeriesResource($series);
+        return new SeriesResource($series);;
     }
 
     /**
