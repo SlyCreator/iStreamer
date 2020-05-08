@@ -4,6 +4,7 @@
 namespace Tests\Feature;
 
 use App\Models\Series;
+use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -13,7 +14,51 @@ class SeriesTest extends TestCase
 
     public function testGetAllSeriesAsCollection()
     {
+        $series =   factory(Series::class,3)->create();
 
+        $this->getJson("/api/v1/admin/series",[
+            'accept'    => 'application/vnd.api+json',
+            'content-type' => 'application/vdn.api+json',
+        ])
+          ->assertStatus(200)
+          ->assertJson([
+              "data" =>[
+                  [
+                      "id" => '1',
+                      "type" => 'series',
+                      "attributes" => [
+                          'title' => $series[0]->title,
+                          'description' => $series[0]->description ,
+                          'year' =>  $series[0]->year,
+                          'created_at' => $series[0]->created_at->toJSON(),
+                          'updated_at' => $series[0]->updated_at->toJSoN(),
+                      ]
+                  ],
+                  [
+                      "id" => '2',
+                      "type" => 'series',
+                      "attributes" => [
+                          'title' => $series[1]->title,
+                          'description' => $series[1]->description ,
+                          'year' =>  $series[1]->year,
+                          'created_at' => $series[1]->created_at->toJSON(),
+                          'updated_at' => $series[1]->updated_at->toJSoN(),
+                      ]
+                  ],
+                  [
+                      "id" => '3',
+                      "type" => 'series',
+                      "attributes" => [
+                          'title' => $series[2]->title,
+                          'description' => $series[2]->description ,
+                          'year' =>  $series[2]->year,
+                          'created_at' => $series[2]->created_at->toJSON(),
+                          'updated_at' => $series[2]->updated_at->toJSoN(),
+                      ]
+                  ],
+
+              ]
+          ]);
     }
 
     public function testGetASeriesAsAResourceObject()
@@ -42,6 +87,22 @@ class SeriesTest extends TestCase
 
     public function testCreateSeriesAsAResourceObject()
     {
+        $faker = Factory::create();
+        $this->postJson('/api/v1/admin/series',[
+            "data" => [
+                "type" => 'series',
+                "attributes" => [
+                    'title' => $faker->text(20),
+                    'description' => $faker->text(200),
+                    'year' =>  $faker->year
+                    ]
+            ]
+        ],[
+            'accept' => 'application/vnd.api+json',
+            'content-type' => 'application/vnd.api+json'
+        ])
+            ->assertStatus(201);
+
 
     }
 
