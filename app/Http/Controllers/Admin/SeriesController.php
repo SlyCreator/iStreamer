@@ -18,7 +18,6 @@ class SeriesController extends Controller
     public function index()
     {
         $series =   Series::all();
-
         return new SeriesCollection($series);
     }
 
@@ -31,7 +30,19 @@ class SeriesController extends Controller
      */
     public function create(Request $request)
     {
-        //
+        //dd('hi');
+        $series =   new Series();
+
+        $series->title = $request->input('attributes.title');
+        $series->description = $request->input('attributes.description');
+        $series->year =  $request->input('attributes.year');
+        $series->save();
+
+        return (new SeriesResource($series))
+            ->response()
+            ->header('Location',route('series.show',[
+                'series' => $series,
+            ]));
     }
 
     /**

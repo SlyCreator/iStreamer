@@ -88,20 +88,41 @@ class SeriesTest extends TestCase
     public function testCreateSeriesAsAResourceObject()
     {
         $faker = Factory::create();
-        $this->postJson('/api/v1/admin/series',[
-            "data" => [
-                "type" => 'series',
-                "attributes" => [
-                    'title' => $faker->text(20),
-                    'description' => $faker->text(200),
-                    'year' =>  $faker->year
-                    ]
+        $data   =    [
+            'type' => 'series',
+            "attributes" => [
+                'title' => $faker->text(20),
+                'description' => $faker->text(200),
+                'year' =>  $faker->year,
+
             ]
-        ],[
+        ];
+
+        $q = $this->postJson('/api/v1/admin/series',$data,[
             'accept' => 'application/vnd.api+json',
             'content-type' => 'application/vnd.api+json'
         ])
-            ->assertStatus(201);
+            ->assertStatus(201)
+            ->assertJson([
+                "data" => [
+                    "id" => '1',
+                    "type" => 'series',
+                    "attributes" => [
+                        'title' => $data[1]['title'],
+                        'description' => $data[1]['description'] ,
+                        'year' =>  $data[1]['year'],
+                        'created_at' => now()->setMilliseconds(0)->toJSON(),
+                        'updated_at' => now() ->setMilliseconds(0)->toJSON(),
+                    ]
+                ]
+            ])->assertHeader('Location',url('/api/v1/admin/series/1'));
+        dd($q);
+        $this->assertDatabaseHas('series',[
+            'id' => 1,
+            'title' => $data['attributes']['title'],
+            'description' => $data['attributes']['description'] ,
+            'year' =>  $data['attributes']['year']
+        ]);
 
 
     }
