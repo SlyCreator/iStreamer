@@ -7,6 +7,7 @@ use App\Http\Resources\SeriesResource;
 use App\Models\Series;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class SeriesController extends Controller
 {
@@ -30,13 +31,11 @@ class SeriesController extends Controller
      */
     public function create(Request $request)
     {
-        //dd('hi');
-        $series =   new Series();
-
-        $series->title = $request->input('attributes.title');
-        $series->description = $request->input('attributes.description');
-        $series->year =  $request->input('attributes.year');
-        $series->save();
+        $series =   Series::create([
+            'title' => $request->input('data.attributes.title'),
+        'description' => $request->input('data.attributes.description'),
+        'year' =>  $request->input('data.attributes.year'),
+        ]);
 
         return (new SeriesResource($series))
             ->response()
@@ -53,7 +52,7 @@ class SeriesController extends Controller
      */
     public function show(Series $series)
     {
-        return new SeriesResource($series);;
+        return new SeriesResource($series);
     }
 
     /**
@@ -65,7 +64,8 @@ class SeriesController extends Controller
      */
     public function update(Request $request, Series $series)
     {
-        //
+        $series->update($request->input('data.attributes'));
+        return new SeriesResource($series);
     }
 
     /**
