@@ -174,6 +174,18 @@ class SeriesTest extends TestCase
 
     public function testDeleteSeries()
     {
-
+        $series = factory(Series::class)->create();
+        $this->delete("api/v1/admin/series/1",[],[
+            'accept' => 'application/vnd.api+json',
+            'content-type' => 'application/vnd.api+json'
+        ])
+            ->assertStatus(204);
+        
+        $this->assertDatabaseMissing('series',[
+            'id' => 1,
+            'title' => $series->title,
+            'description' => $series->description,
+            'year' => $series->year, 
+            ]);
     }
 }

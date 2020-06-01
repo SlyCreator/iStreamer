@@ -74,8 +74,9 @@ class SeriesController extends Controller
      * @param  \App\Series  $series
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Series $series)
+    public function delete(Series $series)
     {
-        //
+        $series->delete();
+        return response(null,204);
     }
 }
