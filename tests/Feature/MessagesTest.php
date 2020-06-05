@@ -11,7 +11,7 @@ class MessagesTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function testGetAllMessages()
+    public function testGetAllMessagesCollection()
     {
 
     }
