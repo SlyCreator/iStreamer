@@ -87,7 +87,7 @@ class SeriesTest extends TestCase
 
     public function testCreateSeriesAsAResourceObject()
     {
-        $faker = Factory::create();
+ //       $faker = Factory::create();
 //        $data   =    [
 //            'type' => 'series',
 //            "attributes" => [
@@ -98,7 +98,7 @@ class SeriesTest extends TestCase
 //            ]
 //        ];
 
-        $this->postJson('/api/v1/admin/series',[
+        $this->postJson('api/v1/admin/series',[
             'data' =>[
                 'type' => 'series',
                 "attributes" => [
@@ -110,8 +110,7 @@ class SeriesTest extends TestCase
         ],[
             'accept' => 'application/vnd.api+json',
             'content-type' => 'application/vnd.api+json'
-        ])
-            ->assertStatus(201)
+        ])->assertStatus(201)
             ->assertJson([
                 "data" => [
                     "id" => '1',
@@ -121,18 +120,16 @@ class SeriesTest extends TestCase
                         'description' => 'A series of time with God' ,
                         'year' =>  '2020',
                         'created_at' => now()->setMilliseconds(0)->toJSON(),
-                        'updated_at' => now() ->setMilliseconds(0)->toJSON(),
+                        'updated_at' => now()->setMilliseconds(0)->toJSON(),
                     ]
                 ]
-            ])->assertHeader('Location',url('/api/v1/admin/series/1'));
+            ]);
         $this->assertDatabaseHas('series',[
             'id' => 1,
             'title' => 'Time with God',
             'description' => 'A series of time with God',
             'year' => '2020',
         ]);
-
-
     }
 
     public function testUpdateSeries()
@@ -174,6 +171,18 @@ class SeriesTest extends TestCase
 
     public function testDeleteSeries()
     {
+        $series = factory(Series::class)->create();
+        $this->delete("api/v1/admin/series/1",[],[
+            'accept' => 'application/vnd.api+json',
+            'content-type' => 'application/vnd.api+json'
+        ])
+            ->assertStatus(204);
 
+        $this->assertDatabaseMissing('series',[
+            'id' => 1,
+            'title' => $series->title,
+            'description' => $series->description,
+            'year' => $series->year,
+            ]);
     }
 }
