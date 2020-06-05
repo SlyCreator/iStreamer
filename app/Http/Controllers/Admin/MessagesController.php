@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Resources\MessageCollection;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,7 +16,8 @@ class MessagesController extends Controller
      */
     public function index()
     {
-        //
+        $message    =   Message::all();
+        return new MessageCollection($message);
     }
 
     /**

@@ -17,6 +17,11 @@ class CreateMessagesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('description');
+
+            $table->unsignedBigInteger('series_id');
+            $table->foreign('series_id')->references('id')
+                ->on('series')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
