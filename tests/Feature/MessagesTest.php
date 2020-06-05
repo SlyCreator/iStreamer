@@ -18,7 +18,7 @@ class MessagesTest extends TestCase
         $series = factory(Series::class,3)->create();
         $message = factory(Message::class,3)->create();
 
-        $this->getJson("/api/v1/admin/messages",[
+        $this->getJson("/api/v1/admin/Message",[
             'accept'    => 'application/vnd.api+json',
             'content-type' => 'application/vdn.api+json',
         ])
