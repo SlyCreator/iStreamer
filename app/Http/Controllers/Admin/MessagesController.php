@@ -14,10 +14,10 @@ class MessagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function fetchAll()
     {
-        $message    =   Message::all();
-        return new MessageCollection($message);
+        $messages    =   Message::all();
+        return new MessageCollection($messages);
     }
 
     /**
