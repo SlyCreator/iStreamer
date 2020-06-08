@@ -24,7 +24,7 @@ Route::prefix('v1')->group(function (){
     Route::group(['prefix'=>'admin'],function (){
 
         Route::prefix('series')->group(function (){
-            Route::get('/',[SeriesController::class,'index']);
+            Route::get('/',[SeriesController::class,'fetchAll']);
             Route::post('/',[SeriesController::class,'create']);
             Route::group(['prefix'=>'{series}'],function (){
                 Route::get('/',[SeriesController::class,'show']);

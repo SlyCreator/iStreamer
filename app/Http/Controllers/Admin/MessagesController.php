@@ -24,13 +24,15 @@ class MessagesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return MessageResource
      */
     public function create(Request $request)
     {
+//        dd($request->all());
         $message = Message::create([
            'title' =>  $request->input('data.attributes.title'),
-            'description' => $request->input('data.atrributes.description'),
+            'description' => $request->input('data.attributes.description'),
             'series_id' => $request->input('data.attributes.series_id'),
         ]);
         return new MessageResource($message);
