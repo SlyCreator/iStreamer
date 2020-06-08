@@ -34,6 +34,7 @@ class SeriesController extends Controller
      */
     public function create(Request $request)
     {
+        //dd($request->all());
         $series =   Series::create([
             'title' => $request->input('data.attributes.title'),
             'description' => $request->input('data.attributes.description'),
