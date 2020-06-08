@@ -16,12 +16,12 @@ class MessagesController extends Controller
      *
      * @return Response
      */
-    public function fetchAll()
+    public function index()
     {
-        $messages    =   Message::with('series')->get()->all();
-        //$messages   =   Message::all();
-        //return new MessageCollection($messages);
-        return response()->json(['data'=>$messages]);
+       // $messages    =   Message::with('series')->get()->all();
+        $messages   =   Message::all();
+        return new MessageCollection($messages);
+        //return response()->json(['data'=>$messages]);
     }
 
     /**
