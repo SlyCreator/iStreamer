@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Resources\MessageCollection;
+use App\Http\Resources\MessageResource;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,9 +26,14 @@ class MessagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $message = Message::create([
+           'title' =>  $request->input('data.attributes.title'),
+            'description' => $request->input('data.atrributes.description'),
+            'series_id' => $request->input('data.attributes.series_id'),
+        ]);
+        return new MessageResource($message);
     }
 
     /**

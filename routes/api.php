@@ -33,7 +33,7 @@ Route::prefix('v1')->group(function (){
             });
         });
 
-        Route::prefix('Message')->group(function (){
+        Route::prefix('message')->group(function (){
             Route::get('/',[MessagesController::class,'fetchAll']);
             Route::post('/',[MessagesController::class,'create']);
             Route::group(['prefix'=>'{message}'],function (){
