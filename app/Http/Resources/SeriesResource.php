@@ -6,6 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class SeriesResource extends JsonResource
 {
+    private $updated_at;
 
     /**
      * Transform the resource into an array.
