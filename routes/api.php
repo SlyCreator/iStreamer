@@ -37,8 +37,8 @@ Route::prefix('v1')->group(function (){
             Route::get('/',[MessagesController::class,'fetchAll']);
             Route::post('/',[MessagesController::class,'create']);
             Route::group(['prefix'=>'{message}'],function (){
-                Route::get('/',[MessagesController::class,'fetch']);
-                Route::put('/',[MessagesController::class,'update']);
+                Route::get('/',[MessagesController::class,'show']);
+                Route::post('/',[MessagesController::class,'update']);
                 Route::delete('/',[MessagesController::class,'delete']);
             });
         });

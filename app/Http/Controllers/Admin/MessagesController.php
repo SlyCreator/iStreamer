@@ -24,32 +24,22 @@ class MessagesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created resource in storage.
      *
-     * @param Request $request
-     * @return MessageResource
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
     {
 //        dd($request->all());
         $message = Message::create([
-           'title' =>  $request->input('data.attributes.title'),
+            'title' =>  $request->input('data.attributes.title'),
             'description' => $request->input('data.attributes.description'),
             'series_id' => $request->input('data.attributes.series_id'),
         ]);
         return new MessageResource($message);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -59,18 +49,8 @@ class MessagesController extends Controller
      */
     public function show(Message $message)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Message $message)
-    {
-        //
+        dd($message);
+        return new MessageResource($message);
     }
 
     /**
@@ -82,7 +62,8 @@ class MessagesController extends Controller
      */
     public function update(Request $request, Message $message)
     {
-        //
+        $message->update($request->input('data.attributes'));
+        return new MessageResource($message);
     }
 
     /**
