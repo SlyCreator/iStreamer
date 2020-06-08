@@ -7,13 +7,14 @@ use App\Http\Resources\MessageResource;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 
 class MessagesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function fetchAll()
     {
@@ -27,11 +28,10 @@ class MessagesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create(Request $request)
     {
-//        dd($request->all());
         $message = Message::create([
             'title' =>  $request->input('data.attributes.title'),
             'description' => $request->input('data.attributes.description'),
@@ -44,8 +44,8 @@ class MessagesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
+     * @param Message $message
+     * @return MessageResource
      */
     public function show(Message $message)
     {
@@ -68,11 +68,13 @@ class MessagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
+     * @param Message $message
+     * @return Response
+     * @throws \Exception
      */
     public function destroy(Message $message)
     {
-        //
+        $message->delete();
+        return response(null,204);
     }
 }
