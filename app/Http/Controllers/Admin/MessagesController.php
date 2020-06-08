@@ -26,7 +26,7 @@ class MessagesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
@@ -49,16 +49,15 @@ class MessagesController extends Controller
      */
     public function show(Message $message)
     {
-        dd($message);
         return new MessageResource($message);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Message $message
+     * @return MessageResource
      */
     public function update(Request $request, Message $message)
     {
