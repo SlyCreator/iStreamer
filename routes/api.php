@@ -24,7 +24,7 @@ Route::prefix('v1')->group(function (){
     Route::group(['prefix'=>'admin'],function (){
 
         Route::prefix('series')->group(function (){
-            Route::get('/',[SeriesController::class,'fetchAll']);
+            Route::get('/',[SeriesController::class,'index']);
             Route::post('/',[SeriesController::class,'create']);
             Route::group(['prefix'=>'{series}'],function (){
                 Route::get('/',[SeriesController::class,'show']);
@@ -34,7 +34,7 @@ Route::prefix('v1')->group(function (){
         });
 
         Route::prefix('message')->group(function (){
-            Route::get('/',[MessagesController::class,'fetchAll']);
+            Route::get('/',[MessagesController::class,'index']);
             Route::post('/',[MessagesController::class,'create']);
             Route::group(['prefix'=>'{message}'],function (){
                 Route::get('/',[MessagesController::class,'show']);
