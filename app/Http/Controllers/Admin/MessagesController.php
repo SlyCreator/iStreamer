@@ -17,8 +17,10 @@ class MessagesController extends Controller
      */
     public function fetchAll()
     {
-        $messages    =   Message::all();
-        return new MessageCollection($messages);
+        $messages    =   Message::with('series')->get()->all();
+        //$messages   =   Message::all();
+        //return new MessageCollection($messages);
+        return response()->json(['data'=>$messages]);
     }
 
     /**
