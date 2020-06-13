@@ -9,7 +9,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Resources\Json\JsonResource;
+use INlluminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
 class SeriesController extends Controller
