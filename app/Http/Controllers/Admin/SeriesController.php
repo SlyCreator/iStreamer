@@ -42,7 +42,7 @@ class SeriesController extends Controller
             'description' => $data['attributes']['description'],
             'year' =>  $data['attributes']['year'],
             'thumbnail'=>basename($path),
-            'thumbnail_url' =>Storage::disk('s3')
+            'thumbnail_url' =>Storage::disk('s3')->url($path)
         ]);
             return new SeriesResource($series);
     }
