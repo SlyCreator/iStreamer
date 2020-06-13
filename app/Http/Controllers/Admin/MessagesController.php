@@ -32,12 +32,13 @@ class MessagesController extends Controller
      */
     public function create(Request $request)
     {
-
+        $data['attributes'] = $request->all();
+        $path = $request->file('audio')->store('audio','s3');
         $message = Message::create([
-            'title' =>  $request->input('data.attributes.title'),
-            'description' => $request->input('data.attributes.description'),
-            'series_id' => $request->input('data.attributes.series_id'),
-            'thumbnail'=>basename($path),
+            'title' => $data['attributes']['title'],
+            'description' => $data['attributes']['description'],
+            'series_id' => $data['attributes']['series_id'],
+            'audio_name'=>basename($path),
             'audio_url' =>Storage::disk('s3')->url($path)
         ]);
         return new MessageResource($message);
