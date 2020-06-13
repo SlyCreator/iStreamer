@@ -32,6 +32,8 @@ class MessagesController extends Controller
      */
     public function create(Request $request)
     {
+        $path = $request->file('images')->store('images','s3');
+        dd($path);
         $message = Message::create([
             'title' =>  $request->input('data.attributes.title'),
             'description' => $request->input('data.attributes.description'),
