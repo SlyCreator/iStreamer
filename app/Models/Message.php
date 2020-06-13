@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    protected $fillable = ['title','description','series_id'];
+    protected $fillable = ['title','description','audio_name','audio_url','series_id'];
 
     public function series()
     {

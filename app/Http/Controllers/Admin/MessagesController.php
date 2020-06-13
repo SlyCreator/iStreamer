@@ -8,7 +8,7 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
-
+use Illuminate\Support\Facades\Storage;
 class MessagesController extends Controller
 {
     /**
@@ -18,10 +18,10 @@ class MessagesController extends Controller
      */
     public function index()
     {
-       // $messages    =   Message::with('series')->get()->all();
-        $messages   =   Message::all();
-        return new MessageCollection($messages);
-        //return response()->json(['data'=>$messages]);
+        $messages    =   Message::with('series')->get()->all();
+//        $messages   =   Message::all();
+//        return new MessageCollection($messages);
+        return response()->json(['data'=>$messages]);
     }
 
     /**
@@ -33,12 +33,12 @@ class MessagesController extends Controller
     public function create(Request $request)
     {
 
-        $path = $request->file('images')->store('images','s3');
-        dd($path);
         $message = Message::create([
             'title' =>  $request->input('data.attributes.title'),
             'description' => $request->input('data.attributes.description'),
             'series_id' => $request->input('data.attributes.series_id'),
+            'thumbnail'=>basename($path),
+            'audio_url' =>Storage::disk('s3')->url($path)
         ]);
         return new MessageResource($message);
     }

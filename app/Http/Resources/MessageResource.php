@@ -21,6 +21,8 @@ class MessageResource extends JsonResource
                 'title' => $this->title,
                 'description' => $this->description ,
                 'series_id' =>  $this->series_id,
+                'audio_name'  =>  $this->audio_name,
+                'audio_url' => $this->audio_url,
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at
             ]
