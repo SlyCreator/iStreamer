@@ -17,6 +17,8 @@ class CreateMessagesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('description');
+            $table->string('audio_name');
+            $table->string('audio_url');
 
             $table->unsignedBigInteger('series_id');
             $table->foreign('series_id')->references('id')
