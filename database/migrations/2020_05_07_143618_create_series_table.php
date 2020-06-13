@@ -18,6 +18,8 @@ class CreateSeriesTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('year');
+            $table->string('thumbnail');
+            $table->string('thumbnail_url');
             $table->timestamps();
         });
     }

@@ -23,6 +23,8 @@ class SeriesResource extends JsonResource
                 'title' => $this->title,
                 'description' => $this->description ,
                 'year' =>  $this->year,
+                'thumbnail' => $this->thumbnail,
+                'thumbnail_url' => $this->thumbnail_url,
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at
                 ]

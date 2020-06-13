@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use INlluminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
@@ -34,11 +35,14 @@ class SeriesController extends Controller
      */
     public function create(Request $request)
     {
-        //dd($request->all());
+        $data['attributes'] = $request->all();
+        $path = $request->file('thumbnail')->store('images','s3');
         $series =   Series::create([
-            'title' => $request->input('data.attributes.title'),
-            'description' => $request->input('data.attributes.description'),
-            'year' =>  $request->input('data.attributes.year'),
+            'title' => $data['attributes']['title'],
+            'description' => $data['attributes']['description'],
+            'year' =>  $data['attributes']['year'],
+            'thumbnail'=>basename($path),
+            'thumbnail_url' =>Storage::disk('s3')
         ]);
             return new SeriesResource($series);
     }
