@@ -32,7 +32,7 @@ class MessagesController extends Controller
      */
     public function create(Request $request)
     {
-        dd($request->all());
+
         $path = $request->file('images')->store('images','s3');
         dd($path);
         $message = Message::create([
